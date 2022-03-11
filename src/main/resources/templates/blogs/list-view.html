@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>201712045 - blog list</title>
+
+  <th:block th:replace="main/index-head::header"></th:block>
+
+</head>
+
+<body>
+
+  <!-- Navigation -->
+  <th:block th:replace="main/index-nav::nav"></th:block>
+  
+  <!-- Page Header -->
+  <header class="masthead" style="background-image: url('../img/home-bg.jpg')">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <div class="site-heading">
+            <h1>Blog List</h1>
+            <span class="subheading">블로그 목록</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <div class="container">
+    </div>
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+        <th:block th:if="${session.name != null}">
+        <div class="text-right">
+          <a class="btn btn-primary float-right" th:href="@{/blogs/register-form}">New Post</a>
+        </div>
+        </th:block>
+      	<th:block th:each="blog:${blogList}">
+        <div class="post-preview">
+          <a th:href="@{'/blogs/' + ${blog.id}}">
+            <h2 class="post-title">
+              [(${blog.title})]
+            </h2>
+            <h3 class="post-subtitle">
+              [(${blog.content})]
+            </h3>
+          </a>
+          <p class="post-meta">Posted by
+            <a href="#"><span th:text="${blog.blogger }"></span></a>
+            on <span th:text="${blog.regDateTime }"/>
+          </p>
+        </div>
+        <hr>
+        </th:block>
+        <!-- Pager
+        <div class="clearfix">
+          <a class="btn btn-primary float-right" href="#">Older Posts &rarr;</a>
+        </div>
+        -->
+      </div>
+    </div>
+  </div>
+  <hr>
+  <!-- Footer -->
+  <th:block th:replace="main/index-footer::footer"></th:block>
+
+</body>
+
+</html>

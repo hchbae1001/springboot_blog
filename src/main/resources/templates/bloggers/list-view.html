@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>blog200412000 blogger list - Start Bootstrap Theme</title>
+  <th:block th:replace="main/index-head::header"></th:block>
+
+</head>
+
+<body>
+
+<!-- Navigation -->
+<th:block th:replace="main/index-nav::nav"></th:block>
+  
+  <!-- Page Header -->
+  <header class="masthead" style="background-image: url('../img/home-bg.jpg')">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <div class="site-heading">
+            <h1>Member List</h1>
+            <span class="subheading">회원 목록</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <div class="container">
+    </div>
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+        <!--
+        <c:if test="${sessionScope.login != null}">
+        <div class="text-right">
+          <a class="btn btn-primary float-right" href="./register-form.html">New Post</a>
+        </div>
+        </c:if>
+        -->
+        <th:block th:each="blogger:${bloggerList}" cloass="post-preview">
+          <a th:href="@{'/bloggers/'+${blogger.id}}">
+            <h2 class="post-title">
+              <th:block th:text="${blogger.name}"></th:block>
+            </h2>
+            <h3 class="post-subtitle">
+              <th:block th:text="${'phone:' + blogger.phone + '- address:' + blogger.address}"></th:block>
+            </h3>
+          </a>
+          <p class="post-meta">Posted by
+            <a href="#"><span th:text="${blogger.email}"></span></a>
+          <form class="form-signin" th:action="@{'/bloggers/' + ${blogger.id}}" th:method="delete">
+            <input type="hidden" name="_method" value="delete"/>
+            <div class="text-center">
+              <button class="btn btn-primary" type="submit">delete</button>
+            </div>
+          </form>
+          <hr>
+        </th:block>
+        <!-- Pager
+        <div class="clearfix">
+          <a class="btn btn-primary float-right" href="#">Older Posts &rarr;</a>
+        </div>
+        -->
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- Footer -->
+  <th:block th:replace="main/index-footer::footer"></th:block>
+
+</body>
+
+</html>

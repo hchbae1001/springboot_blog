@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="iducs.springboot.member_201712045.mapper.BloggerMapper">
+	<insert id="create">
+		insert into blogger201712045
+		values(seq_blogger.nextval,#{email},#{pw},#{name},#{phone},#{address})
+	</insert>
+
+	<select id="readList"
+		resultType="iducs.springboot.member_201712045.domain.Blogger">
+    <![CDATA[
+    select
+		*
+    from
+		blogger201712045
+    order by id desc
+    ]]>
+	</select>
+
+	<select id="readById"
+			resultType="iducs.springboot.member_201712045.domain.Blogger">
+		select
+			*
+		from
+			blogger201712045
+		where id = #{id}
+	</select>
+	<select id="readByEmail"
+			resultType="iducs.springboot.member_201712045.domain.Blogger">
+		select
+			*
+		from
+			blogger201712045
+		where email = #{email}
+	</select>
+
+	<update id="update">
+		update blogger201712045
+		set email=#{email}, pw=#{pw}, name=#{name},
+		phone=#{phone}, address=#{address}
+		where id = #{id}
+	</update>
+
+	<delete id="delete">
+		delete
+		from blogger201712045
+		where id = #{id}
+	</delete>
+
+</mapper>

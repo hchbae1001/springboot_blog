@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <title>201712045 - blog detail page</title>
+  <th:block th:replace="main/index-head::header"></th:block>
+</head>
+<body>
+  <!-- Navigation -->
+  <th:block th:replace="main/index-nav::nav"></th:block>
+  
+  <!-- Page Header -->
+  <header class="masthead" style="background-image: url('../img/post-bg.jpg')">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <div class="site-heading">
+            <h1>Blog Datail</h1>
+            <span class="subheading">블로그 상세 보기</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+  <!-- Post Content -->
+  <article>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <h2 class="section-heading"><span th:text="${blog.title}"></span></h2>
+		  <p> <span th:text="${blog.content }" /> : 블로그 등록, 조회, 수정, 삭제 </p>
+          <a href="#">
+             <img class="img-fluid" th:src="@{'/blogs/getImage?filepath=' + ${blog.filepath}}" alt="">
+          </a>
+          <span class="caption text-muted">To go places and do things that have never been done</span>
+          <p class="post-meta">Posted by
+            <a href="#"><span th:text="${blog.blogger }"></span></a>
+            on <a href="#"><span th:text="${blog.regDateTime }"></span>
+          </p>
+
+          <form name="updateForm" th:action="@{'/blogs/update-form'}" th:method="GET">
+            <input type="hidden" name="id" th:value="${blog.id}"/>
+          </form>
+          <form name="deleteForm" th:action="@{'/blogs/' + ${blog.id}}" th:method="POST">
+            <input type="hidden" name="_method" value="delete" />
+          </form>
+
+          <div class="clearfix text-center">
+            <!--<th:block th:if="${session.email == blog.blogger}"> -->
+            <th:block th:if="${session.email == blog.blogger} or ${session.email == 'admin201712045@induk.ac.kr'}">
+              <a class="btn btn-primary" href="#"
+                 onclick="javascript:document.updateForm.submit();">수정</a> &nbsp; &nbsp;
+              <a class="btn btn-primary" href="#"
+                 onclick="javascript:document.deleteForm.submit();">삭제</a>
+            </th:block>
+	      </div>
+        </div>
+      </div>
+    </div>
+  </article>
+        
+  <hr>
+
+<!-- Footer -->
+<th:block th:replace="main/index-footer::footer"></th:block>
+  
+</body>
+
+</html>
